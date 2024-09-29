@@ -7,10 +7,7 @@ class Task {
     }
 
     public function create($title, $description, $status) {
-        // Удалите начальные и конечные пробелы
         $title = trim($title);
-        
-        // Проверка, что заголовок не пустой и не состоит только из пробелов
         if (empty($title)) {
             throw new Exception('Заголовок не может быть пустым или состоять только из пробелов.');
         }

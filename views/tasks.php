@@ -1,7 +1,6 @@
 <?php ob_start(); ?>
 <h1>Управление задачами</h1>
 <p class="logout"><a href="index.php?path=logout">Выход</a></p>
-
 <form method="POST" class="task-form" id="task-form">
     <input type="text" name="title" placeholder="Заголовок" required>
     <textarea name="description" placeholder="Описание"></textarea>

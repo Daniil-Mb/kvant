@@ -12,7 +12,7 @@ class User {
             $stmt = $this->pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
             return $stmt->execute([$username, $hashedPassword]);
         } catch (PDOException $e) {
-            
+                     
             return false;
         }
     }
