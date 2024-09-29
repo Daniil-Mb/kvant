@@ -11,7 +11,16 @@ class AuthController {
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $response = [];
-            if ($this->userModel->register($_POST['username'], $_POST['password'])) {
+            $username = trim($_POST['username']); // Удаляем пробелы
+    
+            // Проверка на пустое имя пользователя
+            if (empty($username)) {
+                $response = ['success' => false, 'message' => 'Имя пользователя не может быть пустым.'];
+                echo json_encode($response);
+                exit;
+            }
+    
+            if ($this->userModel->register($username, $_POST['password'])) {
                 $response = ['success' => true];
             } else {
                 $response = ['success' => false, 'message' => 'Такой аккаунт уже существует.'];
@@ -21,11 +30,21 @@ class AuthController {
         }
         include 'views/register.php';
     }
+    
 
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $response = [];
-            if ($user = $this->userModel->login($_POST['username'], $_POST['password'])) {
+            $username = trim($_POST['username']); // Удаляем пробелы
+    
+            // Проверка на пустое имя пользователя
+            if (empty($username)) {
+                $response = ['success' => false, 'message' => 'Имя пользователя не может быть пустым.'];
+                echo json_encode($response);
+                exit;
+            }
+    
+            if ($user = $this->userModel->login($username, $_POST['password'])) {
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $response = ['success' => true];
@@ -37,6 +56,7 @@ class AuthController {
         }
         include 'views/login.php';
     }
+    
 
     public function logout() {
         session_start();

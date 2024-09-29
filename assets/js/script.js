@@ -17,6 +17,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const registerForm = document.getElementById('registerForm');
     if (registerForm) {
         registerForm.addEventListener('submit', function(event) {
+            const usernameInput = this.querySelector('input[name="username"]');
+            // Проверка на начальные пробелы
+            if (usernameInput.value.startsWith(' ') || usernameInput.value.trim() === '') {
+                event.preventDefault(); // Отменяем отправку формы
+                document.getElementById('registerError').textContent = 'Имя пользователя не должно начинаться с пробелов и не может быть пустым.';
+                return;
+            }
+
             event.preventDefault();
             let formData = new FormData(this);
 
@@ -38,6 +46,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginForm = document.getElementById('loginForm');
     if (loginForm) {
         loginForm.addEventListener('submit', function(event) {
+            const usernameInput = this.querySelector('input[name="username"]');
+            // Проверка на начальные пробелы
+            if (usernameInput.value.startsWith(' ') || usernameInput.value.trim() === '') {
+                event.preventDefault(); // Отменяем отправку формы
+                document.getElementById('loginError').textContent = 'Имя пользователя не должно начинаться с пробелов и не может быть пустым.';
+                return;
+            }
+
             event.preventDefault();
             let formData = new FormData(this);
 
