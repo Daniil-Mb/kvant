@@ -1,4 +1,4 @@
-<?php ob_start(); ?>
+<?php ob_start(); ?> <!-- Начинаем буферизацию вывода -->
 <div class="auth">
     <h1 class="auth__title">Вход</h1>
     <form id="loginForm" class="auth__form">
@@ -10,6 +10,6 @@
     <p class="auth__link">Нет аккаунта? <a href="index.php?path=register">Зарегистрируйтесь</a></p>
 </div>
 <?php
-$content = ob_get_clean();
+$content = ob_get_clean(); // Завершаем буферизацию и сохраняем содержимое в переменной $content
 include 'views/layout.php';
 ?>

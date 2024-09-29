@@ -1,4 +1,4 @@
-<?php ob_start(); ?>
+<?php ob_start(); ?> <!-- Начинаем буферизацию вывода -->
 <h1>Управление задачами</h1>
 <p class="logout"><a href="index.php?path=logout">Выход</a></p>
 <form method="POST" class="task-form" id="task-form">
@@ -15,8 +15,8 @@
     <input type="text" name="search" placeholder="Поиск" value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
     <select name="status">
         <option value="">Все статусы</option>
-        <option value="completed" <?= isset($_GET['status']) && $_GET['status'] === 'completed' ? 'selected' : '' ?>>Выполнено</option>
-        <option value="not completed" <?= isset($_GET['status']) && $_GET['status'] === 'not completed' ? 'selected' : '' ?>>Не выполнено</option>
+        <option value="completed" <?= isset($_GET['status']) && $_GET['status'] === 'completed' ? 'selected' : '' ?>>Выполнено</option> <!-- Фильтр по выполненным задачам -->
+        <option value="not completed" <?= isset($_GET['status']) && $_GET['status'] === 'not completed' ? 'selected' : '' ?>>Не выполнено</option> <!-- Фильтр по невыполненным задачам -->
     </select>
     <button type="submit">Фильтровать</button>
 </form>
@@ -43,6 +43,6 @@
     <?php endforeach; ?>
 </div>
 <?php
-$content = ob_get_clean();
+$content = ob_get_clean(); // Завершаем буферизацию и сохраняем содержимое в переменной $content
 include 'layout.php';
 ?>

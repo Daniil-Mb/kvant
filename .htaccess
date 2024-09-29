@@ -1,4 +1,4 @@
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php?path=$1 [L,QSA]
+RewriteEngine On # Включаем механизм перезаписи URL
+RewriteCond %{REQUEST_FILENAME} !-f # Условие: если запрашиваемый файл не существует
+RewriteCond %{REQUEST_FILENAME} !-d # Условие: если запрашиваемая директория не существует
+RewriteRule ^(.*)$ index.php?path=$1 [L,QSA] # Перенаправляем все запросы к index.php с параметром path

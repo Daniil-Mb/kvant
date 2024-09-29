@@ -1,3 +1,4 @@
+// Функция для редактирования
 function editTask(id, title, description, status) {
     location.href = '#task-form';
     document.querySelector('[name="title"]').value = title;
