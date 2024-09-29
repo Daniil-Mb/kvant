@@ -10,7 +10,7 @@ class TaskController {
 
     public function index() {
         $searchTerm = $_GET['search'] ?? '';
-        $searchTerm = trim($searchTerm); // Удаляем начальные и конечные пробелы   
+        $searchTerm = trim($searchTerm);
         $tasks = $this->taskModel->getAll($_GET['orderBy'] ?? 'created_at', $_GET['direction'] ?? 'DESC', $_GET['status'] ?? null, $searchTerm);
         include 'views/tasks.php';
     }
@@ -22,15 +22,11 @@ class TaskController {
                 header('Location: index.php');
                 exit;
             } catch (Exception $e) {
-                // Сохраняем сообщение об ошибке в сессии
                 $_SESSION['error'] = $e->getMessage();
-                header('Location: form.php'); // Перенаправление на форму
+                header('Location: form.php'); 
                 exit;
             }
         }
-
-        // Если метод не POST, просто отобразите форму
-        include 'views/form.php'; // Убедитесь, что у вас есть такой файл
     }
 
     public function update() {

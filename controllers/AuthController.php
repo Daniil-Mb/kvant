@@ -11,9 +11,8 @@ class AuthController {
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $response = [];
-            $username = trim($_POST['username']); // Удаляем пробелы
+            $username = trim($_POST['username']);
     
-            // Проверка на пустое имя пользователя
             if (empty($username)) {
                 $response = ['success' => false, 'message' => 'Имя пользователя не может быть пустым.'];
                 echo json_encode($response);
@@ -35,9 +34,8 @@ class AuthController {
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $response = [];
-            $username = trim($_POST['username']); // Удаляем пробелы
+            $username = trim($_POST['username']); 
     
-            // Проверка на пустое имя пользователя
             if (empty($username)) {
                 $response = ['success' => false, 'message' => 'Имя пользователя не может быть пустым.'];
                 echo json_encode($response);
