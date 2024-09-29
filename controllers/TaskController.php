@@ -9,16 +9,28 @@ class TaskController {
     }
 
     public function index() {
-        $tasks = $this->taskModel->getAll($_GET['orderBy'] ?? 'created_at', $_GET['direction'] ?? 'DESC', $_GET['status'] ?? null, $_GET['search'] ?? '');
+        $searchTerm = $_GET['search'] ?? '';
+        $searchTerm = trim($searchTerm); // Удаляем начальные и конечные пробелы   
+        $tasks = $this->taskModel->getAll($_GET['orderBy'] ?? 'created_at', $_GET['direction'] ?? 'DESC', $_GET['status'] ?? null, $searchTerm);
         include 'views/tasks.php';
     }
 
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $this->taskModel->create($_POST['title'], $_POST['description'], $_POST['status'] ?? 'not completed');
-            header('Location: index.php');
-            exit;
+            try {
+                $this->taskModel->create($_POST['title'], $_POST['description'], $_POST['status'] ?? 'not completed');
+                header('Location: index.php');
+                exit;
+            } catch (Exception $e) {
+                // Сохраняем сообщение об ошибке в сессии
+                $_SESSION['error'] = $e->getMessage();
+                header('Location: form.php'); // Перенаправление на форму
+                exit;
+            }
         }
+
+        // Если метод не POST, просто отобразите форму
+        include 'views/form.php'; // Убедитесь, что у вас есть такой файл
     }
 
     public function update() {
